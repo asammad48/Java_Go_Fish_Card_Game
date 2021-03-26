@@ -5,11 +5,63 @@
  */
 package cardsgame;
 
+import java.util.Random;
+import java.util.Scanner;
+
 /**
  *
  * @author Abdul Sammad
  */
 public class CardsGame {
+    public static int Player_Select()
+    {
+        System.out.print("Please Enter 1 for Choosing Head and 0 for Tail:-  ");
+        Scanner Scan=new Scanner(System.in);
+         int turn;
+        try
+        {
+            
+            turn=Scan.nextInt();
+            if(turn==0||turn==1)
+            {
+               Random random = new Random();
+               int x=random.nextInt(2);
+               if(x==turn)
+               {
+                   System.out.print("If you want to Play First enter 1 otherwise 0:-   ");
+                   int play=Scan.nextInt();
+                   if(play==1||play==0)
+                   {
+                       if(play==1)
+                       {
+                           return 1;
+                       }
+                       else
+                       {
+                           return 0;
+                       }
+                   }
+                   else
+                   {
+                       System.out.println("Please enter Valid Choice");
+                       Player_Select();  
+                   }
+               }
+                System.out.println(x);
+            }
+            else
+            {
+                System.out.println("Please enter Valid Option");
+                Player_Select();  
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("You have entered invalid Data Type");
+          Player_Select();  
+        }
+        return 0;
+    }
     public static void main(String[] args)
     {
         int deck_top=52;
@@ -51,5 +103,7 @@ public class CardsGame {
         {
             System.out.print(deck[i]+"    ");
         }
+        System.out.println("");
+        int playeer_turn=Player_Select();
     }
 }
