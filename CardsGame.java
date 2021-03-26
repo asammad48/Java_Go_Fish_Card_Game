@@ -30,13 +30,26 @@ public class CardsGame {
         for(int i=0;i<4;i++)
         {
             deck_top--;
-            new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
+            Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
             deck_top--;
-            new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
+            Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
         }
+        System.out.println("Player Cards        Computer Cards");
+        while(Player_Head!=null)
+        {
+            System.out.println(Player_Head.card+"               "+Computer_Head.card);
+            Player_Head=Player_Head.link;
+            Computer_Head=Computer_Head.link;
+            if(Player_Head.link==null)
+            {
+                System.out.println(Player_Head.card+"               "+Computer_Head.card);
+                break;
+            }
+        }
+        System.out.println("Deck ");
         for(int i=0;i<52;i++)
         {
-            System.out.println(deck[i]);
+            System.out.print(deck[i]+"    ");
         }
     }
 }
