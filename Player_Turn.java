@@ -10,7 +10,7 @@ package cardsgame;
  * @author Abdul Sammad
  */
 public class Player_Turn {
-    public void Player_Turn(Player_Node p)
+    public Player_Node Player_Turn(Player_Node p)
     {
         Player_Node i=p,ipre=p;
         int counti=0;
@@ -25,16 +25,18 @@ public class Player_Turn {
                     if(j.card.equals(i.card))
                     {
                         p=Delete_Node(i,ipre,p);
-                        Player_Node iterate=p;
+                        Player_Node jpre=p;
                         int new_iterate=0;
-                        while(iterate!=j)
+                        while(jpre.link!=j)
                         {
                            if(new_iterate!=0)
                            {
-                               iterate=iterate.link;
+                               jpre=jpre.link;
                            }
                            new_iterate++;
                         }
+                        p=Delete_Node(j,jpre,p);
+                        break;
                     }
                 }
                 j=j.link;
@@ -46,6 +48,7 @@ public class Player_Turn {
             counti++;
             i=i.link;
         }
+        return p;
     }
     public Player_Node Delete_Node(Player_Node del_node,Player_Node pre_node,Player_Node head)
     {

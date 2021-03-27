@@ -92,14 +92,15 @@ public class CardsGame {
             Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
         }
         System.out.println("Player Cards        Computer Cards");
-        while(Player_Head!=null)
+        Player_Node p=Player_Head,c=Computer_Head;
+        while(p!=null)
         {
-            System.out.println(Player_Head.card+"                   "+Computer_Head.card);
-            Player_Head=Player_Head.link;
-            Computer_Head=Computer_Head.link;
-            if(Player_Head.link==null)
+            System.out.println(p.card+"                   "+c.card);
+            p=p.link;
+            c=c.link;
+            if(p.link==null)
             {
-                System.out.println(Player_Head.card+"                   "+Computer_Head.card);
+                System.out.println(p.card+"                   "+c.card);
                 break;
             }
         }
@@ -112,11 +113,22 @@ public class CardsGame {
         int player_turn=Player_Select();
         if(player_turn ==1)
         {
-            
+            Player_Head=new Player_Turn().Player_Turn(Player_Head);
         }
         else
         {
-            
+            Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
+        }
+         while(Player_Head!=null)
+        {
+            System.out.println(Player_Head.card);
+            Player_Head=Player_Head.link;
+           
+            if(Player_Head.link==null)
+            {
+                System.out.println(Player_Head.card);
+                break;
+            }
         }
         
     }
