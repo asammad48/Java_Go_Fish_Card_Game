@@ -26,6 +26,7 @@ public class CardsGame {
             {
                Random random = new Random();
                int x=random.nextInt(2);
+                System.out.println("Toss Value is :- "+x);
                if(x==turn)
                {
                    System.out.print("If you want to Play First enter 1 otherwise 0:-   ");
@@ -47,7 +48,11 @@ public class CardsGame {
                        Player_Select();  
                    }
                }
-                System.out.println(x);
+               else
+               {
+                 return 0;  
+               }
+               
             }
             else
             {
@@ -89,12 +94,12 @@ public class CardsGame {
         System.out.println("Player Cards        Computer Cards");
         while(Player_Head!=null)
         {
-            System.out.println(Player_Head.card+"               "+Computer_Head.card);
+            System.out.println(Player_Head.card+"                   "+Computer_Head.card);
             Player_Head=Player_Head.link;
             Computer_Head=Computer_Head.link;
             if(Player_Head.link==null)
             {
-                System.out.println(Player_Head.card+"               "+Computer_Head.card);
+                System.out.println(Player_Head.card+"                   "+Computer_Head.card);
                 break;
             }
         }
@@ -104,6 +109,15 @@ public class CardsGame {
             System.out.print(deck[i]+"    ");
         }
         System.out.println("");
-        int playeer_turn=Player_Select();
+        int player_turn=Player_Select();
+        if(player_turn ==1)
+        {
+            
+        }
+        else
+        {
+            
+        }
+        
     }
 }
