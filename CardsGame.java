@@ -138,6 +138,8 @@ public class CardsGame {
                 }
             }
             Player_Node piterate=Player_Head;
+            System.out.println("");
+            System.out.println(player_turn);
             System.out.println("Player Cards");
             while(piterate!=null)
             {
@@ -146,6 +148,7 @@ public class CardsGame {
                 if(piterate.link==null)
                 {
                     System.out.println(piterate.card);
+                    break;
                 }
             }
             
@@ -154,7 +157,7 @@ public class CardsGame {
         {
             System.out.println("-------- It is Computer Turn -------");
             Player_Node getCount=Computer_Head;
-            int countIndex=0;
+            int countIndex=-1;
             while(getCount!=null)
             {
                 countIndex=countIndex+1;
@@ -164,7 +167,7 @@ public class CardsGame {
              Random random = new Random();
                int x=random.nextInt(countIndex);
                System.out.println(x);
-               countIndex=0;
+               countIndex=-1;
                getCount=Computer_Head;
                while(getCount!=null)
                {
@@ -190,7 +193,9 @@ public class CardsGame {
                     Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
                 }
             }
-            Player_Node citerate=Player_Head;
+            Player_Node citerate=Computer_Head;
+            System.out.println("");
+            System.out.println(player_turn);
             System.out.println("Computer Cards");
             while(citerate!=null)
             {
@@ -199,6 +204,7 @@ public class CardsGame {
                 if(citerate.link==null)
                 {
                     System.out.println(citerate.card);
+                    break;
                 }
             }
            

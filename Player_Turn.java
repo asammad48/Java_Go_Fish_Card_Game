@@ -2,7 +2,7 @@ package cardsgame;
 public class Player_Turn {
     static int Cards_which_equal=0;
     public static Player_Node Player_Turn(Player_Node p)
-    {
+    {   Cards_which_equal=0;
         Player_Node i=p,ipre=p;
         int counti=0;
         while(i!=null)
