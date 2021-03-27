@@ -107,8 +107,8 @@ public class CardsGame {
         }
         System.out.println("");
         player_turn=Player_Select();
-  //      while(deck_top>-1)
-   //     {
+        while(deck_top>-1)
+        {
           if(player_turn ==1)
         {
             System.out.println("------------- It is Player Turn -----------------");
@@ -160,16 +160,25 @@ public class CardsGame {
                    countIndex++;
                    if(x==countIndex)
                    {
-                       
-                       break;
+                    break;
                    }
                    
                    getCount=getCount.link;
                }
                System.out.println(getCount.card);
            Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
+           if(Computer_Head==null)
+            {
+                for(int i=0;i<4;i++)
+                {
+                    deck_top--;
+                    Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
+                }
+            }
+           
+           
         }  
-     //   }
+      }
         
        /* System.out.println("Computer Cards");
          while(Computer_Head!=null)
