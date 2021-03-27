@@ -137,6 +137,17 @@ public class CardsGame {
                     Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
                 }
             }
+            Player_Node piterate=Player_Head;
+            System.out.println("Player Cards");
+            while(piterate!=null)
+            {
+                System.out.println(piterate.card);
+                piterate=piterate.link;
+                if(piterate.link==null)
+                {
+                    System.out.println(piterate.card);
+                }
+            }
             
         }
         else
@@ -166,6 +177,10 @@ public class CardsGame {
                    getCount=getCount.link;
                }
                System.out.println(getCount.card);
+               Player_Node[] heads=new Player_Node[2];
+               heads=new Player_Turn().Search(getCount.card, Player_Head, Computer_Head);
+                Player_Head=heads[0];
+                Computer_Head=heads[1];
            Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
            if(Computer_Head==null)
             {
@@ -175,7 +190,17 @@ public class CardsGame {
                     Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
                 }
             }
-           
+            Player_Node citerate=Player_Head;
+            System.out.println("Computer Cards");
+            while(citerate!=null)
+            {
+                System.out.println(citerate.card);
+                citerate=citerate.link;
+                if(citerate.link==null)
+                {
+                    System.out.println(citerate.card);
+                }
+            }
            
         }  
       }
