@@ -10,7 +10,7 @@ package cardsgame;
  * @author Abdul Sammad
  */
 public class Player_Turn {
-    public Player_Node Player_Turn(Player_Node p)
+    public static Player_Node Player_Turn(Player_Node p)
     {
         Player_Node i=p,ipre=p;
         int counti=0;
@@ -24,6 +24,7 @@ public class Player_Turn {
                 {
                     if(j.card.equals(i.card))
                     {
+                        System.out.println("Total visit");
                         p=Delete_Node(i,ipre,p);
                         Player_Node jpre=p;
                         int new_iterate=0;
@@ -44,6 +45,8 @@ public class Player_Turn {
                            new_iterate++;
                         }
                         p=Delete_Node(j,jpre,p);
+                        i.link=null;
+                        j.link=null;
                         break;
                         
                        
@@ -60,7 +63,7 @@ public class Player_Turn {
         }
         return p;
     }
-    public Player_Node Delete_Node(Player_Node del_node,Player_Node pre_node,Player_Node head)
+    public static Player_Node Delete_Node(Player_Node del_node,Player_Node pre_node,Player_Node head)
     {
         if(del_node==head)
         {
@@ -76,8 +79,9 @@ public class Player_Turn {
         }
         return head;
     }
-    public Player_Node[] Search(String Card,Player_Node head,Player_Node Other_Node_Head)
+    public static Player_Node[] Search(String Card,Player_Node head,Player_Node Other_Node_Head)
     {
+        int card_equal=0;
         Player_Node[] heads=new Player_Node[2];
         Player_Node i=head,ipre=head;
         int counti=0;
@@ -85,8 +89,9 @@ public class Player_Turn {
         {
             if(i.card.equals(Card))
             {
+                card_equal=1;
                 head=Delete_Node(i,ipre,head);
-               Other_Node_Head=new Distribution_Card().Distribute_Card(Other_Node_Head,Card);
+                Other_Node_Head=new Distribution_Card().Distribute_Card(Other_Node_Head,Card);
                heads[0]=head;
                heads[1]=Other_Node_Head;
                 break;
@@ -97,6 +102,13 @@ public class Player_Turn {
             }
             counti++;
             i=i.link;
+        }
+        if(card_equal==0)
+        {   new CardsGame().deck_top--;
+            System.out.println(new CardsGame().deck_top); 
+             Other_Node_Head=new Distribution_Card().Distribute_Card(Other_Node_Head,new CardsGame().deck[new CardsGame().deck_top]);
+              heads[0]=head;
+               heads[1]=Other_Node_Head;
         }
         return heads;
     }

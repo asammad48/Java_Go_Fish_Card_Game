@@ -1,18 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cardsgame;
 
 import java.util.Random;
 import java.util.Scanner;
-
-/**
- *
- * @author Abdul Sammad
- */
 public class CardsGame {
+    static int player_turn;
     static int deck_top=52;
     static String[] suit={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     static String[] deck=new String[52];
@@ -38,22 +29,22 @@ public class CardsGame {
                    {
                        if(play==1)
                        {
-                           return 1;
+                        return 1;
                        }
                        else
                        {
-                           return 0;
+                        return 0;
                        }
                    }
                    else
                    {
-                       System.out.println("Please enter Valid Choice");
-                       Player_Select();  
+                      System.out.println("Please enter Valid Choice");
+                      Player_Select();  
                    }
                }
                else
                {
-                 return 0;  
+                return 0;  
                }
                
             }
@@ -66,7 +57,7 @@ public class CardsGame {
         catch(Exception ex)
         {
             System.out.println("You have entered invalid Data Type");
-          Player_Select();  
+            Player_Select();  
         }
         return 0;
     }
@@ -89,12 +80,12 @@ public class CardsGame {
         new Shuffle_Array().shuffleArray(deck);
         for(int i=0;i<4;i++)
         {
-            System.out.println("Please enter Value for String "+ i);
-            String new_Value=Scan.next();
-            //deck_top--;
-            Player_Head=new Distribution_Card().Distribute_Card(Player_Head,new_Value);
-            //deck_top--;
-            Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,new_Value);
+            //System.out.println("Please enter Value for String "+ i);
+            //String new_Value=Scan.next();
+            deck_top--;
+            Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
+            deck_top--;
+            Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
         }
         System.out.println("Player Cards        Computer Cards");
         Player_Node p=Player_Head,c=Computer_Head;
@@ -115,10 +106,12 @@ public class CardsGame {
             System.out.print(deck[i]+"    ");
         }
         System.out.println("");
-        int player_turn=Player_Select();
-        if(player_turn ==1)
+        player_turn=Player_Select();
+  //      while(deck_top>-1)
+   //     {
+          if(player_turn ==1)
         {
-           /* Player_Head=new Player_Turn().Player_Turn(Player_Head);
+            System.out.println("------------- It is Player Turn -----------------");
             System.out.println("Please enter The card you want to request :- ");
             String card_Request=Scan.next();
             int check_card=Check_card(card_Request,suit);
@@ -132,12 +125,53 @@ public class CardsGame {
             else
             {
                 System.out.println("Please enter Right Value");
-            }*/
+            }
+            
+            
+            Player_Head=new Player_Turn().Player_Turn(Player_Head);
+            if(Player_Head==null)
+            {
+                for(int i=0;i<4;i++)
+                {
+                    deck_top--;
+                    Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
+                }
+            }
+            
         }
         else
         {
-            Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
-        }
+            System.out.println("-------- It is Computer Turn -------");
+            Player_Node getCount=Computer_Head;
+            int countIndex=0;
+            while(getCount!=null)
+            {
+                countIndex=countIndex+1;
+                getCount=getCount.link;
+            }
+            System.out.println(countIndex);
+             Random random = new Random();
+               int x=random.nextInt(countIndex);
+               System.out.println(x);
+               countIndex=0;
+               getCount=Computer_Head;
+               while(getCount!=null)
+               {
+                   countIndex++;
+                   if(x==countIndex)
+                   {
+                       
+                       break;
+                   }
+                   
+                   getCount=getCount.link;
+               }
+               System.out.println(getCount.card);
+           Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
+        }  
+     //   }
+        
+       /* System.out.println("Computer Cards");
          while(Computer_Head!=null)
         {
             System.out.println(Computer_Head.card);
@@ -150,6 +184,18 @@ public class CardsGame {
             }
         }
         
+         System.out.println("Player_Cards");
+         while(Player_Head!=null)
+        {
+            System.out.println(Player_Head.card);
+            Player_Head=Player_Head.link;
+           
+            if(Player_Head.link==null)
+            {
+                System.out.println(Player_Head.card);
+                break;
+            }
+        }*/
     }
     public static int Check_card(String card_Request,String[] suit)
     {
