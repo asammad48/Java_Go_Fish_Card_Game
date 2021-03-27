@@ -13,6 +13,9 @@ import java.util.Scanner;
  * @author Abdul Sammad
  */
 public class CardsGame {
+    static int deck_top=52;
+    static String[] suit={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
+    static String[] deck=new String[52];
     public static int Player_Select()
     {
         System.out.print("Please Enter 1 for Choosing Head and 0 for Tail:-  ");
@@ -69,10 +72,10 @@ public class CardsGame {
     }
     public static void main(String[] args)
     {
-        int deck_top=52;
+        Scanner Scan=new Scanner(System.in);
+        
         Player_Node Player_Head=null,Computer_Head=null;
-        String[] suit={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
-        String[] deck=new String[52];
+        
         int count=-1;
         for(int i=0;i<13;i++)
         {
@@ -86,10 +89,12 @@ public class CardsGame {
         new Shuffle_Array().shuffleArray(deck);
         for(int i=0;i<4;i++)
         {
-            deck_top--;
-            Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
-            deck_top--;
-            Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
+            System.out.println("Please enter Value for String "+ i);
+            String new_Value=Scan.next();
+            //deck_top--;
+            Player_Head=new Distribution_Card().Distribute_Card(Player_Head,new_Value);
+            //deck_top--;
+            Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,new_Value);
         }
         System.out.println("Player Cards        Computer Cards");
         Player_Node p=Player_Head,c=Computer_Head;
@@ -113,23 +118,50 @@ public class CardsGame {
         int player_turn=Player_Select();
         if(player_turn ==1)
         {
-            Player_Head=new Player_Turn().Player_Turn(Player_Head);
+           /* Player_Head=new Player_Turn().Player_Turn(Player_Head);
+            System.out.println("Please enter The card you want to request :- ");
+            String card_Request=Scan.next();
+            int check_card=Check_card(card_Request,suit);
+            Player_Node[] heads=new Player_Node[2];
+            if(check_card==1)
+            {
+                heads=new Player_Turn().Search(card_Request, Computer_Head, Player_Head);
+                Computer_Head=heads[0];
+                Player_Head=heads[1];
+            }
+            else
+            {
+                System.out.println("Please enter Right Value");
+            }*/
         }
         else
         {
             Computer_Head=new Player_Turn().Player_Turn(Computer_Head);
         }
-         while(Player_Head!=null)
+         while(Computer_Head!=null)
         {
-            System.out.println(Player_Head.card);
-            Player_Head=Player_Head.link;
+            System.out.println(Computer_Head.card);
+            Computer_Head=Computer_Head.link;
            
-            if(Player_Head.link==null)
+            if(Computer_Head.link==null)
             {
-                System.out.println(Player_Head.card);
+                System.out.println(Computer_Head.card);
                 break;
             }
         }
         
+    }
+    public static int Check_card(String card_Request,String[] suit)
+    {
+        int check_card=0;
+            for(int k=0;k<13;k++)
+            {
+                if(card_Request.equals(suit[k]))
+                {
+                    check_card=1;
+                    break;
+                }
+            }
+        return check_card;
     }
 }

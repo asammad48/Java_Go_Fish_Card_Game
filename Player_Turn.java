@@ -29,6 +29,14 @@ public class Player_Turn {
                         int new_iterate=0;
                         while(jpre.link!=j)
                         {
+                            if(jpre.link==j)
+                            {
+                                break;
+                            }
+                            if(jpre==j)
+                            {
+                                break;
+                            }
                            if(new_iterate!=0)
                            {
                                jpre=jpre.link;
@@ -37,11 +45,13 @@ public class Player_Turn {
                         }
                         p=Delete_Node(j,jpre,p);
                         break;
+                        
+                       
                     }
                 }
                 j=j.link;
             }
-            if(counti!=0)
+            if(counti!=0&&ipre.link!=null)
             {
                 ipre=ipre.link;
             }
@@ -65,5 +75,29 @@ public class Player_Turn {
             pre_node.link=del_node.link;
         }
         return head;
+    }
+    public Player_Node[] Search(String Card,Player_Node head,Player_Node Other_Node_Head)
+    {
+        Player_Node[] heads=new Player_Node[2];
+        Player_Node i=head,ipre=head;
+        int counti=0;
+        while(i!=null)
+        {
+            if(i.card.equals(Card))
+            {
+                head=Delete_Node(i,ipre,head);
+               Other_Node_Head=new Distribution_Card().Distribute_Card(Other_Node_Head,Card);
+               heads[0]=head;
+               heads[1]=Other_Node_Head;
+                break;
+            }
+            if(counti!=0)
+            {
+                ipre=ipre.link;
+            }
+            counti++;
+            i=i.link;
+        }
+        return heads;
     }
 }
