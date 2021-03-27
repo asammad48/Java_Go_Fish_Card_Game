@@ -1,15 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cardsgame;
-
-/**
- *
- * @author Abdul Sammad
- */
 public class Player_Turn {
+    static int Cards_which_equal=0;
     public static Player_Node Player_Turn(Player_Node p)
     {
         Player_Node i=p,ipre=p;
@@ -24,6 +15,7 @@ public class Player_Turn {
                 {
                     if(j.card.equals(i.card))
                     {
+                        Cards_which_equal=1;
                         System.out.println("Total visit");
                         p=Delete_Node(i,ipre,p);
                         Player_Node jpre=p;
@@ -60,6 +52,17 @@ public class Player_Turn {
             }
             counti++;
             i=i.link;
+        }
+        if(Cards_which_equal==0)
+        {
+            if(new CardsGame().player_turn==1)
+            {
+                new CardsGame().player_turn=0;
+            }
+            else
+            {
+                new CardsGame().player_turn=1;
+            }
         }
         return p;
     }
