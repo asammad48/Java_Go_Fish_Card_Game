@@ -1,3 +1,9 @@
+//To use this Game Legally Please comment these lines
+//193-208
+//266-273
+//176-183
+
+
 package cardsgame;
 
 import java.util.Random;
@@ -5,8 +11,11 @@ import java.util.Scanner;
 public class CardsGame {
     static int player_turn;
     static int deck_top=52;
+    static int Player_Pair=0;
+    static int Computer_Pair=0;
     static String[] suit={"A","2","3","4","5","6","7","8","9","10","J","Q","K"};
     static String[] deck=new String[52];
+    static Player_Node Player_Head=null,Computer_Head=null;
     public static int Player_Select()
     {
         System.out.print("Please Enter 1 for Choosing Head and 0 for Tail:-  ");
@@ -65,7 +74,7 @@ public class CardsGame {
     {
         Scanner Scan=new Scanner(System.in);
         
-        Player_Node Player_Head=null,Computer_Head=null;
+        
         
         int count=-1;
         for(int i=0;i<13;i++)
@@ -100,8 +109,8 @@ public class CardsGame {
                 break;
             }
         }
-        System.out.println("Deck ");
-        for(int i=0;i<52;i++)
+        System.out.println("Deck from top ");
+        for(int i=deck_top-1;i>-1;i--)
         {
             System.out.print(deck[i]+"    ");
         }
@@ -112,7 +121,29 @@ public class CardsGame {
           if(player_turn ==1)
         {
             System.out.println("------------- It is Player Turn -----------------");
-            System.out.println("Please enter The card you want to request :- ");
+            
+             Player_Node piterate=Player_Head;
+            System.out.println("");
+            //System.out.println(player_turn);
+            System.out.println("Player Cards");
+            if(piterate!=null)
+            {
+               while(piterate.link!=null)
+            {
+                System.out.println(piterate.card);
+                piterate=piterate.link;
+                
+            } 
+            }
+            if(piterate!=null)
+            {
+                System.out.println(piterate.card);
+            }
+            if(piterate==null&&deck_top==0)
+            {
+                break;
+            }
+            System.out.print("Please enter The card you want to request :- ");
             String card_Request=Scan.next();
             int check_card=Check_card(card_Request,suit);
             Player_Node[] heads=new Player_Node[2];
@@ -134,28 +165,57 @@ public class CardsGame {
                 for(int i=0;i<4;i++)
                 {
                     deck_top--;
-                    Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);
+                    if(deck_top!=-1)
+                    {
+                    Player_Head=new Distribution_Card().Distribute_Card(Player_Head,deck[deck_top]);    
+                    }
+                    else
+                    {
+                        deck_top++;
+                        break;
+                    }
+                    
                 }
             }
-            Player_Node piterate=Player_Head;
+           
             System.out.println("");
-            System.out.println(player_turn);
-            System.out.println("Player Cards");
-            while(piterate!=null)
-            {
-                System.out.println(piterate.card);
-                piterate=piterate.link;
-                if(piterate.link==null)
-                {
-                    System.out.println(piterate.card);
-                    break;
-                }
-            }
-            
+            System.out.println("Please Donot use this illegally it is just for Checking the Deck");
+            System.out.println("-------------------------------------------");
+            System.out.println("Deck from top ");
+        for(int i=deck_top-1;i>-1;i--)
+        {
+            System.out.print(deck[i]+"    ");
+        }
+            System.out.println("-------------------------------------------");
+            System.out.println("");
+            System.out.println("Total Pair Player:- "+Player_Pair);
         }
         else
         {
             System.out.println("-------- It is Computer Turn -------");
+            Player_Node citerate=Computer_Head;
+            System.out.println("");
+            //System.out.println(player_turn);
+            System.out.println("These Card are Displaying Also for Checking the Logic Donot use it Illegally");
+            System.out.println("---------------------------------------------------------");
+            System.out.println("Computer Cards");
+            if(citerate!=null)
+            {
+                 while(citerate.link!=null)
+            {
+                System.out.println(citerate.card);
+                citerate=citerate.link;
+            }
+            }
+           if(citerate!=null)
+                {
+                    System.out.println(citerate.card);
+                }
+            System.out.println("--------------------------------------------------------");
+            if(citerate==null&&deck_top==0)
+            {
+                break;
+            }
             Player_Node getCount=Computer_Head;
             int countIndex=-1;
             while(getCount!=null)
@@ -163,10 +223,15 @@ public class CardsGame {
                 countIndex=countIndex+1;
                 getCount=getCount.link;
             }
-            System.out.println(countIndex);
-             Random random = new Random();
-               int x=random.nextInt(countIndex);
-               System.out.println(x);
+            //System.out.println("Count Index :- "+countIndex);
+           int x=0; 
+           if(countIndex>=1)
+           {
+                Random random = new Random();
+              x=random.nextInt(countIndex);
+           }
+            
+              // System.out.println(x);
                countIndex=-1;
                getCount=Computer_Head;
                while(getCount!=null)
@@ -179,7 +244,7 @@ public class CardsGame {
                    
                    getCount=getCount.link;
                }
-               System.out.println(getCount.card);
+               //System.out.println(getCount.card);
                Player_Node[] heads=new Player_Node[2];
                heads=new Player_Turn().Search(getCount.card, Player_Head, Computer_Head);
                 Player_Head=heads[0];
@@ -190,27 +255,44 @@ public class CardsGame {
                 for(int i=0;i<4;i++)
                 {
                     deck_top--;
-                    Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);
+                    if(deck_top!=-1)
+                    {
+                    Computer_Head=new Distribution_Card().Distribute_Card(Computer_Head,deck[deck_top]);    
+                    }
+                    else
+                    {
+                        deck_top++;
+                        break;
+                    }
+                    
                 }
             }
-            Player_Node citerate=Computer_Head;
+            
+           System.out.println("");
+           System.out.println("Please Donot use this illegally it is just for Checking the Deck");
+            System.out.println("-------------------------------------------------------------");
+           System.out.println("Deck from top ");
+        for(int i=deck_top-1;i>-1;i--)
+        {
+            System.out.print(deck[i]+"    ");
+        }
+            System.out.println("--------------------------------------------------------------");
             System.out.println("");
-            System.out.println(player_turn);
-            System.out.println("Computer Cards");
-            while(citerate!=null)
-            {
-                System.out.println(citerate.card);
-                citerate=citerate.link;
-                if(citerate.link==null)
-                {
-                    System.out.println(citerate.card);
-                    break;
-                }
-            }
-           
+            System.out.println("Total Pair Computer:- "+Computer_Pair);
         }  
       }
-        
+        if(Player_Pair>Computer_Pair)
+        {
+            System.out.println("You Have Won the Game");
+        }
+        else if(Computer_Pair>Player_Pair)
+        {
+            System.out.println("Computer Have Won the Game");
+        }
+        else
+        {
+            System.out.println("The Game is tied");
+        }
        /* System.out.println("Computer Cards");
          while(Computer_Head!=null)
         {

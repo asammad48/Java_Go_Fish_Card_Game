@@ -1,16 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package cardsgame;
 
 import java.util.Random;
 
-/**
- *
- * @author Abdul Sammad
- */
+
 public class Shuffle_Array {
     public static void shuffleArray(String[] a) {
         int n = a.length;
